@@ -81,14 +81,14 @@ export default function IdeaInput({ onSubmit }) {
               borderRadius: '6px',
               background:   'transparent',
               border:       '1px solid #1e293b',
-              color:        '#4f6482',
+              color:        '#ffffff',
               fontSize:     '12px',
               cursor:       'pointer',
               transition:   'all 0.15s',
               textAlign:    'left',
             }}
               onMouseEnter={e => { e.target.style.borderColor = '#334155'; e.target.style.color = '#94a3b8'; }}
-              onMouseLeave={e => { e.target.style.borderColor = '#1e293b'; e.target.style.color = '#4f6482'; }}
+              onMouseLeave={e => { e.target.style.borderColor = '#1e293b'; e.target.style.color = '#ffffff'; }}
             >
               {ex.slice(0, 40)}…
             </button>
@@ -114,7 +114,7 @@ export default function IdeaInput({ onSubmit }) {
           borderRadius: '8px',
           background:   loading || !idea.trim() ? '#1e293b' : 'rgba(6,182,212,0.1)',
           border:       loading || !idea.trim() ? '1px solid #1e293b' : '1px solid rgba(6,182,212,0.25)',
-          color:        loading || !idea.trim() ? '#4f6482' : '#06b6d4',
+          color:        loading || !idea.trim() ? '#ffffff' : '#06b6d4',
           fontWeight:   '700',
           fontSize:     '12px',
           cursor:       loading || !idea.trim() ? 'not-allowed' : 'pointer',

@@ -175,7 +175,7 @@ function App() {
           </div>
           <div style={{
             fontSize:   '13px',
-            color:      '#4f6482',
+            color:      '#ffffff',
             marginTop:  '2px',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
@@ -220,7 +220,7 @@ function App() {
             fontWeight: '700',
             letterSpacing: '0.1em',
             textTransform: 'uppercase',
-            color:      '#4f6482',
+            color:      '#ffffff',
             marginBottom:'12px',
             fontFamily: "'DM Mono', monospace",
           }}>
@@ -228,7 +228,7 @@ function App() {
           </div>
 
           {pastResults.length === 0 ? (
-            <p style={{ fontSize: '10px', color: '#4f6482', fontStyle: 'italic' }}>
+            <p style={{ fontSize: '10px', color: '#ffffff', fontStyle: 'italic' }}>
               No validations yet.
             </p>
           ) : (
