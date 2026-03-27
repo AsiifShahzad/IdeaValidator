@@ -36,6 +36,23 @@ app.add_middleware(
 )
 
 
+# ── Startup Event ─────────────────────────────────────────────────────────────
+
+@app.on_event("startup")
+async def startup_event():
+    """Log startup confirmation"""
+    port = os.getenv("PORT", "8000")
+    print(f"\n✅ Idea Validator API is running!")
+    print(f"📊 Listening on http://0.0.0.0:{port}")
+    print(f"📚 Docs available at http://0.0.0.0:{port}/docs\n")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Log shutdown"""
+    print("\n🛑 Idea Validator API shutting down...\n")
+
+
 # ── Request/Response models ────────────────────────────────────────────────────
 
 class IdeaRequest(BaseModel):
@@ -84,6 +101,23 @@ def make_initial_state(idea: str) -> dict:
 
 
 # ── POST /validate-idea ────────────────────────────────────────────────────────
+
+@app.get("/")
+async def root():
+    """Root endpoint — confirms API is running"""
+    return {
+        "name": "Idea Validator API",
+        "version": "1.0",
+        "status": "running",
+        "docs": "/docs"
+    }
+
+
+@app.get("/health")
+async def health():
+    """Health check endpoint"""
+    return {"status": "ok", "service": "idea-validator"}
+
 
 @app.post("/validate-idea", response_model=ValidationResponse)
 async def validate_idea(request: IdeaRequest):
@@ -175,10 +209,3 @@ async def get_validation_history(type: str = None):
         return {"count": len(history), "results": history}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-
-
-# ── GET /health ────────────────────────────────────────────────────────────────
-
-@app.get("/health")
-async def health():
-    return {"status": "ok"}
