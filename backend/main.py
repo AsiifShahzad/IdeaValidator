@@ -28,9 +28,18 @@ from backend.memory import get_history
 
 app = FastAPI(title="Idea Validator API")
 
+# ── CORS Configuration ─────────────────────────────────────────────────────────
+# Only allow requests from trusted frontend URLs
+allowed_origins = [
+    "https://idea-validator-blue.vercel.app",  # Production frontend
+    "http://localhost:5173",                     # Local Vite dev server
+    "http://localhost:3000",                     # Alternative local dev port
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
