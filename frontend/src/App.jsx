@@ -377,16 +377,6 @@ function App() {
 
         {view === 'compare' && (
           <div>
-            <h1 style={{
-              fontSize:      '28px',
-              fontWeight:    '800',
-              fontFamily:    "'Inter', sans-serif",
-              color:         '#f8fafc',
-              margin:        '0 0 28px',
-              letterSpacing: '-0.03em',
-            }}>
-              Compare Ideas
-            </h1>
             <ComparisonView results={pastResults} />
           </div>
         )}

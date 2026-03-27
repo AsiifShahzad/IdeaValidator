@@ -45,7 +45,7 @@ export default function ComparisonView({ results }) {
   ] : [];
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
 
       {/* Header + filter */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
@@ -93,7 +93,7 @@ export default function ComparisonView({ results }) {
             {[0, 1].map(slot => (
               <div key={slot}>
                 <div style={{
-                  fontSize: '10px', fontWeight: '700', letterSpacing: '0.1em',
+                  fontSize: '18px', fontWeight: '700', letterSpacing: '0.1em',
                   color: slot === 0 ? '#60a5fa' : '#a78bfa',
                   fontFamily: "'DM Mono', monospace', textTransform: 'uppercase",
                   marginBottom: '6px',
