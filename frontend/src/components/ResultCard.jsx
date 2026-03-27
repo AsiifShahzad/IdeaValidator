@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import IdeaTypeBadge from './IdeaTypeBadge';
 import FactorsCard   from './FactorsCard';
 import ToolsUsed     from './ToolsUsed';
 
@@ -193,9 +192,8 @@ export default function ResultCard({ result }) {
   return (
     <div style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
 
-      {/* Header row */}
-      <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'12px' }}>
-        <IdeaTypeBadge type={result.idea_type} />
+      {/* Verdict badge */}
+      <div style={{ display:'flex', justifyContent:'flex-start' }}>
         <div style={{ padding: isMobile ? '6px 14px' : '6px 18px', borderRadius:'8px', background:verdictBg, border:`1px solid ${verdictColor}30`, color:verdictColor, fontWeight:'800', fontSize: isMobile ? '12px' : '14px', fontFamily:"'DM Mono',monospace", letterSpacing:'0.1em' }}>
           {verdict}
         </div>
