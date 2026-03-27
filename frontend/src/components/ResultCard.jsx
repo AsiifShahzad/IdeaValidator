@@ -124,7 +124,7 @@ function VerdictExplanation({ verdict, score, confidence, isMobile }) {
       bg: 'rgba(52,211,153,0.08)',
     },
     MAYBE: {
-      title: 'Worth Exploring 🤔',
+      title: 'Worth Exploring',
       description: `Your idea scores ${score.toFixed(1)}/10 with ${confidence}% confidence. This moderate score suggests potential but with some considerations. Do more research on specific weak areas, test your assumptions with target users, and refine your approach before a full launch.`,
       color: '#06b6d4',
       bg: 'rgba(6,182,212,0.08)',
