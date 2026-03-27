@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { RadarChart, PolarGrid, PolarAngleAxis, Radar, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import IdeaTypeBadge from './IdeaTypeBadge';
 
@@ -10,6 +10,13 @@ function levelToNum(level) {
 
 export default function ComparisonView({ results }) {
   const [filterType, setFilterType] = useState('all');
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const [selected, setSelected]     = useState([0, 1]);
 
   // Filter by idea type
@@ -48,12 +55,12 @@ export default function ComparisonView({ results }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
 
       {/* Header + filter */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-        <div>
-          <h2 style={{ fontSize: '22px', fontWeight: '800', color: '#f8fafc', margin: 0, fontFamily: "'DM Mono', monospace" }}>
+      <div style={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row', alignItems: isMobile ? 'flex-start' : 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', width: '100%' }}>
+        <div style={{ width: isMobile ? '100%' : 'auto' }}>
+          <h2 style={{ fontSize: isMobile ? '20px' : '22px', fontWeight: '800', color: '#f8fafc', margin: 0, fontFamily: "'DM Mono', monospace" }}>
             Compare Ideas
           </h2>
-          <p style={{ color: '#ffffff', fontSize: '13px', marginTop: '4px' }}>
+          <p style={{ color: '#ffffff', fontSize: isMobile ? '12px' : '13px', marginTop: '4px' }}>
             Filter by type to compare apples to apples
           </p>
         </div>
@@ -65,7 +72,7 @@ export default function ComparisonView({ results }) {
           style={{
             padding: '8px 14px', borderRadius: '8px',
             background: '#1e293b', border: '1px solid #334155',
-            color: '#94a3b8', fontSize: '12px',
+            color: '#94a3b8', fontSize: isMobile ? '11px' : '12px',
             fontFamily: "'DM Mono', monospace",
             cursor: 'pointer', outline: 'none',
           }}
@@ -89,11 +96,11 @@ export default function ComparisonView({ results }) {
       ) : (
         <>
           {/* Idea selectors */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '12px' }}>
             {[0, 1].map(slot => (
               <div key={slot}>
                 <div style={{
-                  fontSize: '18px', fontWeight: '700', letterSpacing: '0.1em',
+                  fontSize: isMobile ? '14px' : '18px', fontWeight: '700', letterSpacing: '0.1em',
                   color: slot === 0 ? '#60a5fa' : '#a78bfa',
                   fontFamily: "'DM Mono', monospace', textTransform: 'uppercase",
                   marginBottom: '6px',
@@ -110,7 +117,7 @@ export default function ComparisonView({ results }) {
                   style={{
                     width: '100%', padding: '8px 12px', borderRadius: '8px',
                     background: '#1e293b', border: `1px solid ${slot === 0 ? 'rgba(96,165,250,0.3)' : 'rgba(167,139,250,0.3)'}`,
-                    color: '#94a3b8', fontSize: '12px',
+                    color: '#94a3b8', fontSize: isMobile ? '11px' : '12px',
                     fontFamily: "'DM Mono', monospace",
                     cursor: 'pointer', outline: 'none',
                   }}
@@ -127,32 +134,34 @@ export default function ComparisonView({ results }) {
 
           {/* Side-by-side score cards */}
           {item1 && item2 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '12px' }}>
               {[item1, item2].map((item, idx) => {
                 const color   = idx === 0 ? '#60a5fa' : '#a78bfa';
                 const verdict = item.verdict;
                 const vc      = verdict === 'GO' ? '#34d399' : verdict === 'MAYBE' ? '#06b6d4' : '#fb7185';
                 return (
                   <div key={idx} style={{
-                    padding: '20px', borderRadius: '12px',
+                    padding: isMobile ? '16px' : '20px', borderRadius: '12px',
                     background: '#0a1628', border: `1px solid ${color}20`,
                   }}>
-                    <IdeaTypeBadge type={item.idea_type} />
-                    <p style={{ color: '#64748b', fontSize: '12px', margin: '10px 0 14px', lineHeight: '1.4' }}>
+                    <div style={{ marginBottom: '12px' }}>
+                      <IdeaTypeBadge type={item.idea_type} />
+                    </div>
+                    <p style={{ color: '#64748b', fontSize: isMobile ? '11px' : '12px', margin: '10px 0 14px', lineHeight: '1.4' }}>
                       {item.idea?.slice(0, 80)}...
                     </p>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px', marginBottom: '8px' }}>
-                      <span style={{ fontSize: '36px', fontWeight: '800', color, fontFamily: "'DM Mono', monospace" }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: isMobile ? '6px' : '8px', marginBottom: '12px', flexWrap: 'wrap' }}>
+                      <span style={{ fontSize: isMobile ? '28px' : '36px', fontWeight: '800', color, fontFamily: "'DM Mono', monospace" }}>
                         {(item.overall_score ?? 0).toFixed(1)}
                       </span>
-                      <span style={{ color: '#4f6482', fontSize: '12px' }}>/10</span>
+                      <span style={{ color: '#4f6482', fontSize: isMobile ? '10px' : '12px' }}>/10</span>
                       <span style={{
-                        marginLeft: 'auto', padding: '3px 10px', borderRadius: '6px',
-                        fontSize: '12px', fontWeight: '700', fontFamily: "'DM Mono', monospace",
-                        color: vc, background: `${vc}15`,
+                        marginLeft: isMobile ? 'auto' : 'auto', padding: '4px 10px', borderRadius: '6px',
+                        fontSize: isMobile ? '10px' : '12px', fontWeight: '700', fontFamily: "'DM Mono', monospace",
+                        color: vc, background: `${vc}15`, whiteSpace: 'nowrap',
                       }}>{verdict}</span>
                     </div>
-                    <div style={{ fontSize: '11px', color: '#4f6482', fontFamily: "'DM Mono', monospace" }}>
+                    <div style={{ fontSize: isMobile ? '10px' : '11px', color: '#4f6482', fontFamily: "'DM Mono', monospace" }}>
                       {item.confidence_percent}% confidence
                     </div>
                   </div>
@@ -189,7 +198,7 @@ export default function ComparisonView({ results }) {
 
           {/* Success/failure side by side */}
           {item1 && item2 && (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '12px' }}>
               {[item1, item2].map((item, idx) => {
                 const color = idx === 0 ? '#60a5fa' : '#a78bfa';
                 return (
