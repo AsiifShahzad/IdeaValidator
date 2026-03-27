@@ -359,38 +359,18 @@ function App() {
 
         {view === 'result' && currentResult && (
           <div>
-            <div style={{
-              display: 'flex', alignItems: 'center',
-              justifyContent: 'space-between', marginBottom: '28px',
-              flexWrap: 'wrap', gap: '12px',
+            <h1 style={{
+              fontSize:      '28px',
+              fontWeight:    '800',
+              fontFamily:    "'Inter', sans-serif",
+              color:         '#f8fafc',
+              margin:        '0 0 28px',
+              letterSpacing: '-0.03em',
+              wordBreak:     'break-word',
+              maxWidth:      '100%',
             }}>
-              <h1 style={{
-                fontSize:      '28px',
-                fontWeight:    '800',
-                fontFamily:    "'Inter', sans-serif",
-                color:         '#f8fafc',
-                margin:        0,
-                letterSpacing: '-0.03em',
-                wordBreak:     'break-word',
-                maxWidth:      '100%',
-              }}>
-                Results
-              </h1>
-              <button onClick={handleNew} style={{
-                padding:    '9px 18px',
-                borderRadius:'8px',
-                background: 'rgba(6,182,212,0.1)',
-                border:     '1px solid rgba(6,182,212,0.25)',
-                color:      '#06b6d4',
-                fontSize:   '12px',
-                fontWeight: '700',
-                cursor:     'pointer',
-                fontFamily: "'DM Mono', monospace",
-                letterSpacing: '0.05em',
-              }}>
-                + New Validation
-              </button>
-            </div>
+              Results
+            </h1>
             <ResultCard result={currentResult} />
           </div>
         )}

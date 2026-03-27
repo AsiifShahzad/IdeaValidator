@@ -114,7 +114,59 @@ function Reasoning({ text, isMobile }) {
     </div>
   );
 }
+// ── Verdict explanation with descriptions ────────────────────────────────────
+function VerdictExplanation({ verdict, score, confidence, isMobile }) {
+  const verdictConfig = {
+    GO: {
+      title: 'Go Ahead! 🚀',
+      description: `Your idea scores ${score.toFixed(1)}/10 with ${confidence}% confidence. This high score indicates strong market potential, manageable competition, and acceptable risks. You have a solid foundation to proceed with development and market testing.`,
+      color: '#34d399',
+      bg: 'rgba(52,211,153,0.08)',
+    },
+    MAYBE: {
+      title: 'Worth Exploring 🤔',
+      description: `Your idea scores ${score.toFixed(1)}/10 with ${confidence}% confidence. This moderate score suggests potential but with some considerations. Do more research on specific weak areas, test your assumptions with target users, and refine your approach before a full launch.`,
+      color: '#06b6d4',
+      bg: 'rgba(6,182,212,0.08)',
+    },
+    'NOT GO': {
+      title: 'Reconsider or Pivot ⚠️',
+      description: `Your idea scores ${score.toFixed(1)}/10 with ${confidence}% confidence. This lower score indicates significant challenges—either high market saturation, unmanageable risks, or weak demand signals. Consider pivoting the idea, targeting a different market, or revisiting it after market conditions change.`,
+      color: '#fb7185',
+      bg: 'rgba(251,113,133,0.08)',
+    },
+  };
 
+  const config = verdictConfig[verdict] || verdictConfig['MAYBE'];
+
+  return (
+    <div style={{
+      padding: isMobile ? '14px 12px' : '16px 18px',
+      borderRadius: '12px',
+      background: config.bg,
+      border: `1px solid ${config.color}30`,
+      marginBottom: '16px',
+    }}>
+      <div style={{
+        fontSize: isMobile ? '13px' : '14px',
+        fontWeight: '700',
+        color: config.color,
+        fontFamily: "'DM Mono', monospace",
+        marginBottom: '8px',
+      }}>
+        {config.title}
+      </div>
+      <p style={{
+        fontSize: isMobile ? '12px' : '13px',
+        color: '#cbd5e1',
+        lineHeight: '1.7',
+        margin: 0,
+      }}>
+        {config.description}
+      </p>
+    </div>
+  );
+}
 // ── Main ResultCard ────────────────────────────────────────────────────────────
 export default function ResultCard({ result }) {
   if (!result) return null;
@@ -148,6 +200,9 @@ export default function ResultCard({ result }) {
           {verdict}
         </div>
       </div>
+
+      {/* Verdict explanation with description */}
+      <VerdictExplanation verdict={verdict} score={score} confidence={conf} isMobile={isMobile} />
 
       {/* Score + confidence */}
       <div style={{ 
