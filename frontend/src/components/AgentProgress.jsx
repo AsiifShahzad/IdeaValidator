@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://ideavalidator-8h1j.onrender.com';
 
 const AGENT_STEPS = [
   { id: 'classifier',          label: 'Classifier',    desc: 'Detecting idea type & assigning tools' },

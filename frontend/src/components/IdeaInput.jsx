@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = 'https://ideavalidator-8h1j.onrender.com';
 
 const EXAMPLES = [
   'A SaaS tool that auto-generates legal contracts for freelancers',
