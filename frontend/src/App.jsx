@@ -327,9 +327,9 @@ function App() {
               wordBreak:     'break-word',
               maxWidth:      '100%',
             }}>
-              Validate Your Idea
+              Validate Your <span style={{ color: '#06b6d4' }}>Idea</span>
             </h1>
-            <p style={{ color: '#4f6482', fontSize: '14px', marginBottom: '32px', lineHeight: '1.6', margin: '0 0 32px 0' }}>
+            <p style={{ color: '#ffffff', fontSize: '14px', marginBottom: '32px', lineHeight: '1.6', margin: '0 0 32px 0' }}>
               Describe your idea and our AI pipeline will analyze demand, competition, and risk in parallel.
             </p>
             <IdeaInput onSubmit={handleSubmit} />
