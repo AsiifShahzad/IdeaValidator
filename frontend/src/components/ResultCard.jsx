@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FiTrendingUp, FiSwords, FiAlertTriangle, FiArrowRight } from 'react-icons/fi';
 import FactorsCard   from './FactorsCard';
 import ToolsUsed     from './ToolsUsed';
 
@@ -44,7 +45,7 @@ function MetricCard({ label, value, why, color, icon, isMobile }) {
     >
       <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', marginBottom: levelNum !== null ? '10px' : 0 }}>
         <div style={{ display:'flex', alignItems:'center', gap: isMobile ? '6px' : '8px' }}>
-          <span style={{ fontSize: isMobile ? '14px' : '16px' }}>{icon}</span>
+          <span style={{ fontSize: isMobile ? '14px' : '16px', color: '#06b6d4', display: 'flex', alignItems: 'center' }}>{icon}</span>
           <span style={{ fontSize: isMobile ? '9px' : '11px', fontWeight:'700', letterSpacing:'0.08em', textTransform:'uppercase', color:'#ffffff', fontFamily:"'DM Mono',monospace" }}>{label}</span>
         </div>
         <div style={{ display:'flex', alignItems:'center', gap: isMobile ? '6px' : '8px' }}>
@@ -78,8 +79,8 @@ function NextSteps({ steps = [], isMobile }) {
   if (!steps.length) return null;
   return (
       <div style={{ padding: isMobile ? '16px' : '20px', borderRadius:'12px', background:'rgba(6,182,212,0.04)', border:'1px solid rgba(6,182,212,0.15)' }}>
-      <div style={{ fontSize: isMobile ? '10px' : '11px', fontWeight:'700', letterSpacing:'0.1em', textTransform:'uppercase', color:'#ffffff', marginBottom:'14px', fontFamily:"'DM Mono',monospace", wordBreak: 'break-word', maxWidth: '100%' }}>
-        ⚡ What To Do Next
+      <div style={{ fontSize: isMobile ? '10px' : '11px', fontWeight:'700', letterSpacing:'0.1em', textTransform:'uppercase', color:'#ffffff', marginBottom:'14px', fontFamily:"'DM Mono',monospace", wordBreak: 'break-word', maxWidth: '100%', display: 'flex', alignItems: 'center', gap: '6px' }}>
+        <FiArrowRight size={isMobile ? 14 : 16} style={{ color: '#06b6d4' }} /> What To Do Next
       </div>
       <div style={{ display:'flex', flexDirection:'column', gap:'10px' }}>
         {steps.map((step, i) => (
@@ -236,9 +237,9 @@ export default function ResultCard({ result }) {
         gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
         gap:'8px' 
       }}>
-        <MetricCard label="Demand"      value={demand.level      || 'medium'} why={result.demand_why}      color="#34d399" icon="📈" isMobile={isMobile} />
-        <MetricCard label="Competition" value={competition.level || 'medium'} why={result.competition_why} color="#fb7185" icon="⚔️" isMobile={isMobile} />
-        <MetricCard label="Risk"        value={['high','medium','low'].includes(risk.level) ? risk.level : 'medium'}        why={result.risk_why}        color="#f97316" icon="⚠️" isMobile={isMobile} />
+        <MetricCard label="Demand"      value={demand.level      || 'medium'} why={result.demand_why}      color="#34d399" icon={<FiTrendingUp size={isMobile ? 14 : 16} color="#06b6d4" />} isMobile={isMobile} />
+        <MetricCard label="Competition" value={competition.level || 'medium'} why={result.competition_why} color="#fb7185" icon={<FiSwords size={isMobile ? 14 : 16} color="#06b6d4" />} isMobile={isMobile} />
+        <MetricCard label="Risk"        value={['high','medium','low'].includes(risk.level) ? risk.level : 'medium'}        why={result.risk_why}        color="#f97316" icon={<FiAlertTriangle size={isMobile ? 14 : 16} color="#06b6d4" />} isMobile={isMobile} />
       </div>
 
       {/* Tools */}
