@@ -1,0 +1,7 @@
+groq
+langgraph
+python-dotenv
+tavily-python
+pytrends
+requests
+newsapi-python
